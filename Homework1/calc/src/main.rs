@@ -1,5 +1,5 @@
-use std::*;
 use std::str::FromStr;
+use std::*;
 
 fn gcd(mut n: u64, mut m: u64) -> u64 {
     assert!(n != 0 && m != 0);
@@ -31,41 +31,35 @@ fn main() {
     let mut numbers = Vec::new();
 
     for arg in std::env::args().skip(2) {
-        numbers.push(u64::from_str(&arg)
-            .expect("error parsing argument"));
+        numbers.push(u64::from_str(&arg).expect("error parsing argument"));
     }
 
     if numbers.len() == 0 {
         std::process::exit(0);
-    }
-    else if numbers.len() == 1 {
+    } else if numbers.len() == 1 {
         println!("{}", numbers[0]);
-    }
-    else if arguments[1].to_string() == "gcd" {
+    } else if arguments[1].to_string() == "gcd" {
         let mut d = numbers[0];
         for m in &numbers[1..] {
             d = gcd(d, *m);
         }
 
         println!("{:?}", d);
-    }
-    else if arguments[1] == "sum" {
+    } else if arguments[1] == "sum" {
         let mut s = numbers[0];
         for m in &numbers[1..] {
             s = sum(s, *m);
         }
 
         println!("{:?}", s);
-    }
-    else if arguments[1] == "product" {
+    } else if arguments[1] == "product" {
         let mut p = numbers[0];
         for m in &numbers[1..] {
             p = product(p, *m);
         }
 
         println!("{:?}", p);
-    }
-    else if arguments[1] == "lcm" {
+    } else if arguments[1] == "lcm" {
         let mut n = numbers[0];
         for m in &numbers[1..] {
             n = lcm(n, *m);
