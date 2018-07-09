@@ -18,6 +18,14 @@ fn sum(n: u64, m: u64) -> u64 {
     n + m
 }
 
+fn product(n: u64, m: u64) -> u64 {
+    n * m
+}
+
+fn lcm(n: u64, m: u64) -> u64 {
+    n * m / gcd(n, m)
+}
+
 fn main() {
     let arguments: Vec<String> = std::env::args().collect();
     let mut numbers = Vec::new();
@@ -49,6 +57,22 @@ fn main() {
 
         println!("{:?}", s);
     }
+    else if arguments[1] == "product" {
+        let mut p = numbers[0];
+        for m in &numbers[1..] {
+            p = product(p, *m);
+        }
+
+        println!("{:?}", p);
+    }
+    else if arguments[1] == "lcm" {
+        let mut n = numbers[0];
+        for m in &numbers[1..] {
+            n = lcm(n, *m);
+        }
+
+        println!("{:?}", n);
+    }
 }
 
 #[test]
@@ -63,4 +87,18 @@ fn test_sum() {
     assert_eq!(sum(15, 20), 35);
 
     assert_eq!(sum(1 + 2 + 3 + 4 + 5, 6 + 7 + 8 + 9), 10 + 20 + 10 + 5);
+}
+
+#[test]
+fn test_product() {
+    assert_eq!(product(5, 6), 30);
+
+    assert_eq!(product(5 * 3 * 2, 6 * 10), 180 * 10);
+}
+
+#[test]
+fn test_lcm() {
+    assert_eq!(lcm(3, 10), 30);
+
+    assert_eq!(lcm(3 * 10, 30 * 40 * 20), 2400);
 }
